@@ -38,9 +38,11 @@ Chaque « nœud » de Kubernetes dans k3d correspond à un conteneur Docker isol
 ## Exercice 4 — Déclaratif
 
 7. Quelle différence entre `kubectl create` et `kubectl apply` ?
-   >
+   >kubectl create (Impératif) : Crée la ressource définie dans le fichier. Si la ressource       existe déjà dans le cluster, la commande échoue et renvoie une erreur. Elle ne met pas à jour   l'existant.
+kubectl apply (Déclaratif) : Applique l'état décrit dans le fichier. S'il n'existe pas, il le crée ; s'il existe déjà, il met à jour intelligemment la configuration en comparant l'état actuel et le nouvel état désiré (gestion par la dernière configuration appliquée).
 8. À quoi sert le `selector` d'un Service ? Que se passe-t-il s'il ne correspond à aucun pod ?
-   >
+   >Rôle du selector : Il permet au Service de savoir exactement quels pods il doit cibler et router (grâce à la correspondance des labels).
+Conséquence s'il ne correspond à aucun pod : Le Service est créé correctement, mais il sera « vide » : aucun point de terminaison (endpoints) ne lui sera associé, et il ne pourra acheminer aucun trafic vers une application.
 
 ## Exercice 5 — Scaling & mises à jour
 
