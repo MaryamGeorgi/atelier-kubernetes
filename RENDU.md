@@ -23,9 +23,9 @@ Chaque « nœud » de Kubernetes dans k3d correspond à un conteneur Docker isol
 ## Exercice 2 — Premier déploiement
 
 3. Quels objets Kubernetes ont été créés par `kubectl create deployment` ? (indice : `kubectl get all`)
-   >
+   >Un Deployment (nommé web) : Il sert de ressource de haut niveau pour gérer l'état souhaité de l'application. Un ReplicaSet (généré automatiquement par le Deployment) : Il garantit qu'un nombre défini de répods (par défaut 1) tourne en permanence. Un Pod (géré par le ReplicaSet, dont le nom commence par web-...) : C'est le conteneur proprement dit qui exécute l'image Nginx.Un Service (créé par la commande kubectl expose, nommé web) : Il expose l'application en interne sur le port 80 pour permettre aux autres composants (ou au tunnel port-forward) d'y accéder.
 4. Vous avez supprimé le pod `web-...` : que s'est-il passé, et pourquoi ?
-   >
+   >En observant le terminal avec kubectl get pods -w, on remarque que dès que le pod est supprimé, il disparaît brièvement, mais un nouveau pod est immédiatement recréé (avec un suffixe aléatoire légèrement différent). Le nom du pod initial a donc changé. Cela est arrivé grâce à la boucle de réconciliation de Kubernetes, l'état réel du cluster est constamment comparé à l'état désiré. Comme le Deployment exige qu'un pod (replicas: 1) tourne en permanence pour l'application web, la disparition soudaine du pod a déclenché une correction automatique : le ReplicaSet en a instantanément généré un nouveau pour respecter la consigne.   
 
 ## Exercice 3 — Modifier un conteneur en direct
 
