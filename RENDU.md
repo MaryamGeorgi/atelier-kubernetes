@@ -30,9 +30,10 @@ Chaque « nœud » de Kubernetes dans k3d correspond à un conteneur Docker isol
 ## Exercice 3 — Modifier un conteneur en direct
 
 5. Après suppression du pod, votre message « Bienvenue... » a-t-il survécu ? Pourquoi ?
-   >
+   >Non, le message personnalisé a disparu et la page d'accueil par défaut de Nginx est revenue.
+   Le système de fichiers d'un conteneur est éphémère. Lorsque le pod a été supprimé, le ReplicaSet en a recréé un nouveau entièrement neuf à partir de l'image      nginx d'origine. Toutes les modifications manuelles et directes apportées à l'intérieur du conteneur (via kubectl exec) sont donc perdues lors de son             redémarrage ou de son remplacement.   
 6. Pourquoi le `port-forward` a-t-il cessé de fonctionner après la suppression du pod ?
-   >
+   >Un tunnel port-forward vers un Service Kubernetes s'attache en réalité à la connexion réseau d'un pod spécifique en arrière-plan. Lorsque ce pod a été            supprimé, le tunnel a perdu sa cible initiale, ce qui a provoqué son arrêt (d'où l'erreur et le besoin de le relancer).
 
 ## Exercice 4 — Déclaratif
 
