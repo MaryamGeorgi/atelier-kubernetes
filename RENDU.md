@@ -63,9 +63,10 @@ site-579fc5cf47-vwpzc   1/1     Running   0          4m53s   10.42.1.10   k3d-la
 ## Exercice 6 — Portainer & Mario
 
 12. URL publique de votre Mario :
-    >
+    >https://urban-space-chainsaw-569pjrvrjp5h7996-8585.app.github.dev/
 13. Retrouvez le Deployment `mario` en ligne de commande. Portainer et `kubectl` parlent-ils au même composant ? Lequel ?
-    >
+    >Oui, Portainer et kubectl s'adressent exactement au même composant Kubernetes.
+   Ils interagissent tous les deux avec l'objet Deployment nommé mario  qui gère lui-même les ReplicaSets et les Pods du jeu. Portainer n'est qu'une interface graphique (GUI) qui pilote l'API de Kubernetes, tandis que kubectl est l'outil en ligne de commande (CLI) qui communique avec cette même API.
 
 ## Bonus (facultatif)
 
