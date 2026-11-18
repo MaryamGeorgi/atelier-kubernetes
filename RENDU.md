@@ -75,4 +75,4 @@ site-579fc5cf47-vwpzc   1/1     Running   0          4m53s   10.42.1.10   k3d-la
 
 ---
 
-**Score obtenu avec `./scripts/check.sh` :** ... / ...
+**Score obtenu avec `./scripts/check.sh` :** 14 / 18
