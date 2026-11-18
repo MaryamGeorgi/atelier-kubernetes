@@ -48,12 +48,17 @@ Conséquence s'il ne correspond à aucun pod : Le Service est créé correctemen
 
 9. Sur quels nœuds se trouvent vos 3 réplicas ? Collez la sortie de `kubectl get pods -l app=site -o wide`.
    ```
+) $ kubectl get pods -l app=site -o wide
+NAME                    READY   STATUS    RESTARTS   AGE     IP           NODE               NOMINATED NODE   READINESS GATES
+site-579fc5cf47-4j2z5   1/1     Running   0          4m45s   10.42.2.6    k3d-lab-server-0   <none>           <none>
+site-579fc5cf47-rjhqf   1/1     Running   0          4m58s   10.42.0.7    k3d-lab-agent-0    <none>           <none>
+site-579fc5cf47-vwpzc   1/1     Running   0          4m53s   10.42.1.10   k3d-lab-agent-1    <none>           <none>
 
    ```
 10. Avec l'image `nginx:9.99`, quel statut avait le pod ? Quelle commande vous a donné la cause ?
-    >
+    >Le nouveau pod présentait le statut ErrImagePull. La commande qui nous donne la cause est la suivante : kubectl describe pod -l app=site.
 11. Pendant la panne, le site restait-il accessible ? Pourquoi ?
-    >
+    >Oui, le site est resté totalement accessible.Grâce à la stratégie de mise à jour par défaut (Rolling Update), Kubernetes ne retire pas les anciens pods fonctionnels tant que les nouveaux ne sont pas prêts et opérationnels. Comme la version nginx:9.99 est bloquée au démarrage, le trafic continue d'être acheminé vers les anciens pods de la version précédente qui tournent toujours en arrière-plan.
 
 ## Exercice 6 — Portainer & Mario
 
